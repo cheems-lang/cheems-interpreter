@@ -1,8 +1,17 @@
-import Token.Token;
+import java.io.Console;
 
 public class Cheems {
   public static void main(String[] args) {
-    System.out.println(Token.ILLEGAL);
-    System.out.println(Token.EOF);
+    Console console = System.console();
+
+    if (console == null) {
+      System.out.println("No console available");
+      return;
+    }
+
+    while (true) {
+      String input = console.readLine(">>> ");
+      System.out.println(input);
+    }
   }
 }
