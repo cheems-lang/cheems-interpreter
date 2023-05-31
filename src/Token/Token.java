@@ -1,6 +1,9 @@
 package Token;
 
 public class Token {
+  public String type;
+  public char literal;
+
   public static final String ILLEGAL = "ILLEGAL";
   public static final String EOF = "EOF";
 
@@ -24,4 +27,9 @@ public class Token {
   // Keywords
   public static final String FUNCTION = "FUNCTION";
   public static final String LET = "LET";
+
+  public Token(String type, char literal) {
+    this.type = type;
+    this.literal = literal;
+  }
 }
