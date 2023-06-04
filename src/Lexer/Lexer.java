@@ -24,15 +24,39 @@ public class Lexer {
   }
 
   public Token nextToken() {
-    Token tok;
+    Token tok = null;
 
     switch (this.ch) {
       case '=':
         tok = new Token(Token.ASSIGN, this.ch);
         break;
-
-      default:
+      case ';':
+        tok = new Token(Token.SEMICOLON, this.ch);
+        break;
+      case '(':
+        tok = new Token(Token.LPAREN, this.ch);
+        break;
+      case ')':
+        tok = new Token(Token.RPAREN, this.ch);
+        break;
+      case ',':
+        tok = new Token(Token.COMMA, this.ch);
+        break;
+      case '+':
+        tok = new Token(Token.PLUS, this.ch);
+        break;
+      case '{':
+        tok = new Token(Token.LBRACE, this.ch);
+        break;
+      case '}':
+        tok = new Token(Token.RBRACE, this.ch);
+        break;
+      case 0:
+        tok = new Token(Token.EOF, this.ch);
         break;
     }
+
+    this.readChar();
+    return tok;
   }
 }
