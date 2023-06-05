@@ -5,11 +5,12 @@ import Token.Token;
 public class Lexer {
   public String input;
   public int position;
-  public int readPosition;
+  public int readPosition = 0;
   public char ch;
 
   public Lexer(String input) {
     this.input = input;
+    readChar();
   }
 
   public void readChar() {
@@ -52,7 +53,7 @@ public class Lexer {
         tok = new Token(Token.RBRACE, this.ch);
         break;
       case 0:
-        tok = new Token(Token.EOF, this.ch);
+        tok = new Token(Token.EOF, '\0');
         break;
     }
 
