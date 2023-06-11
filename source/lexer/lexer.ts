@@ -1,4 +1,4 @@
-import { Token, TokenType } from "../token/token.ts";
+import { Token, TokenType } from '../token/token.ts';
 
 export class Lexer {
   // attributes
@@ -14,9 +14,9 @@ export class Lexer {
 
   readChar() {
     if (this.readPosition >= this.input.length) {
-      this.ch = '\0';
+      this.ch = 'EOF';
     } else {
-      this.ch = this.input.charAt(this.readPosition);
+      this.ch = this.input[this.readPosition];
     }
 
     this.position = this.readPosition;
@@ -24,38 +24,39 @@ export class Lexer {
   }
 
   nextToken(): Token {
-    let tok: Token | null;
+    let tok: Token;
 
     switch (this.ch) {
       case '=':
-        tok = { type: TokenType.Assign, literal: this.ch };
+        tok = { type: TokenType.ASSIGN, literal: this.ch };
         break;
       case ';':
-        tok = { type: TokenType.Semicolon, literal: this.ch };
+        tok = { type: TokenType.SEMICOLON, literal: this.ch };
         break;
       case '(':
-        tok = { type: TokenType.LeftParenthesis, literal: this.ch };
+        tok = { type: TokenType.LPAREN, literal: this.ch };
         break;
       case ')':
-        tok = { type: TokenType.RightParenthesis, literal: this.ch };
+        tok = { type: TokenType.RPAREN, literal: this.ch };
         break;
       case ',':
-        tok = { type: TokenType.Comma, literal: this.ch };
+        tok = { type: TokenType.COMMA, literal: this.ch };
         break;
       case '+':
-        tok = { type: TokenType.Plus, literal: this.ch };
+        tok = { type: TokenType.PLUS, literal: this.ch };
         break;
       case '{':
-        tok = { type: TokenType.LeftBrace, literal: this.ch };
+        tok = { type: TokenType.LBRACE, literal: this.ch };
         break;
       case '}':
-        tok = { type: TokenType.RightBrace, literal: this.ch };
+        tok = { type: TokenType.RBRACE, literal: this.ch };
         break;
-      case '\0':
-        tok = { type: TokenType.EOF, literal: '\0' };
+      case 'EOF':
+        tok = { type: TokenType.EOF, literal: this.ch };
         break;
     }
 
+    this.readChar();
     return tok!;
   }
 }

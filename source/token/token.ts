@@ -1,21 +1,20 @@
-export enum TokenType {
-  Illegal,
-  EOF,
-  Ident,
-  Int,
-  Assign,
-  Plus,
-  Comma,
-  Semicolon,
-  LeftParenthesis,
-  RightParenthesis,
-  LeftBrace,
-  RightBrace,
-  Function,
-  Let
+export const TokenType = {
+  ILLEGAL: 'ILLEGAL',
+  EOF: 'EOF',
+  IDENT: 'IDENT',
+  ASSIGN: '=',
+  PLUS: '+',
+  COMMA: ',',
+  SEMICOLON: ';',
+  LPAREN: '(',
+  RPAREN: ')',
+  LBRACE: '{',
+  RBRACE: '}',
+  FUNCTION: 'FUNCTION',
+  LET: 'LET'
 }
 
 export interface Token {
-  type: TokenType,
+  type: string,
   literal: string
 }
