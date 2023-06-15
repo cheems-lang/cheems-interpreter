@@ -54,9 +54,31 @@ export class Lexer {
       case 'EOF':
         tok = { type: TokenType.EOF, literal: this.ch };
         break;
+      default:
+        if (this.isLetter(this.ch)) {
+          tok = { type: TokenType.IDENT, literal: this.readIdentifier() };
+          return tok;
+        } else {
+          tok = { type: TokenType.ILLEGAL, literal: this.ch };
+        }
+        break;
     }
 
     this.readChar();
     return tok!;
+  }
+
+  readIdentifier(): string {
+    const position = this.position;
+
+    while (this.isLetter(this.ch)) {
+      this.readChar();
+    }
+
+    return this.input.substring(position, this.position);
+  }
+
+  isLetter(ch: string): boolean {
+    return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch === '_';
   }
 }
