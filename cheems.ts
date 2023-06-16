@@ -1,1 +1,1 @@
-console.log('migrating to deno!');
+console.log('migrating to deno!')
