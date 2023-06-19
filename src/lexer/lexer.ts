@@ -1,4 +1,4 @@
-import { Token, TokenType } from '../token/token.ts'
+import { Token, TokenType, lookUpIdent } from '../token/token.ts'
 
 export class Lexer {
   // attributes
@@ -56,7 +56,8 @@ export class Lexer {
         break
       default:
         if (this.isLetter(this.ch)) {
-          tok = { type: TokenType.IDENT, literal: this.readIdentifier() }
+          const literal = this.readIdentifier()
+          tok = { type: lookUpIdent(literal), literal }
           return tok
         } else {
           tok = { type: TokenType.ILLEGAL, literal: this.ch }

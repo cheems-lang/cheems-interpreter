@@ -36,11 +36,11 @@ Deno.test('test identifiers', () => {
   }`
 
   const tests: {type: string, literal: string}[] = [
-    { type: 'let', literal: TokenType.LET },
-    { type: 'five', literal: TokenType.IDENT },
-    { type: '=', literal: TokenType.ASSIGN },
+    { type: TokenType.LET, literal: 'let' },
+    { type: TokenType.IDENT, literal: 'five' },
+    { type: TokenType.ASSIGN, literal: '=' },
     { type: '5', literal: '5' },
-    { type: ';', literal: TokenType.SEMICOLON }
+    { type: TokenType.SEMICOLON, literal: ';' }
   ]
 
   const l = new Lexer(input)
