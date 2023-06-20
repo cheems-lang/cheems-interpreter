@@ -2,6 +2,7 @@ export const TokenType = {
   ILLEGAL: 'ILLEGAL',
   EOF: 'EOF',
   IDENT: 'IDENT',
+  NUMBER: 'NUMBER',
   ASSIGN: '=',
   PLUS: '+',
   COMMA: ',',

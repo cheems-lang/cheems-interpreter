@@ -26,6 +26,8 @@ export class Lexer {
   nextToken(): Token {
     let tok: Token
 
+    this.skipWhitespace()
+
     switch (this.ch) {
       case '=':
         tok = { type: TokenType.ASSIGN, literal: this.ch }
@@ -59,6 +61,9 @@ export class Lexer {
           const literal = this.readIdentifier()
           tok = { type: lookUpIdent(literal), literal }
           return tok
+        } else if (this.isDigit(this.ch)) {
+          tok = { type: TokenType.NUMBER, literal: this.readNumber() }
+          return tok;
         } else {
           tok = { type: TokenType.ILLEGAL, literal: this.ch }
         }
@@ -81,5 +86,25 @@ export class Lexer {
 
   isLetter(ch: string): boolean {
     return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch === '_'
+  }
+
+  skipWhitespace() {
+    while (this.ch === ' ' || this.ch === '\t' || this.ch === '\n' || this.ch === '\r') {
+      this.readChar()
+    }
+  }
+
+  readNumber(): string {
+    const position = this.position
+
+    while(this.isDigit(this.ch)) {
+      this.readChar()
+    }
+
+    return this.input.substring(position, this.position)
+  }
+
+  isDigit(ch: string): boolean {
+    return '0' <= ch && ch <= '9'
   }
 }

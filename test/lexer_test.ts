@@ -21,7 +21,7 @@ Deno.test('test basic tokens', () => {
 
   for (const tt of tests) {
     const tok: Token = l.nextToken()
-    console.log(tok)
+    console.info(tok)
     assertEquals(tok.type, tt.type)
     assertEquals(tok.literal, tt.literal)
   }
@@ -39,7 +39,7 @@ Deno.test('test identifiers', () => {
     { type: TokenType.LET, literal: 'let' },
     { type: TokenType.IDENT, literal: 'five' },
     { type: TokenType.ASSIGN, literal: '=' },
-    { type: '5', literal: '5' },
+    { type: TokenType.NUMBER, literal: '5' },
     { type: TokenType.SEMICOLON, literal: ';' }
   ]
 
@@ -47,7 +47,7 @@ Deno.test('test identifiers', () => {
 
   for (const tt of tests) {
     const tok: Token = l.nextToken()
-    console.log(tok)
+    console.info(tok)
     assertEquals(tok.type, tt.type)
     assertEquals(tok.literal, tt.literal)
   }
