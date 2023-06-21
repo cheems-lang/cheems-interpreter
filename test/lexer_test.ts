@@ -5,7 +5,7 @@ import { assertEquals } from 'https://deno.land/std@0.191.0/testing/asserts.ts'
 
 Deno.test('test basic tokens', () => {
   const input = '=+(){},;'
-  const tests: {type: string, literal: string}[] = [
+  const tests: { type: string, literal: string }[] = [
     { type: '=', literal: TokenType.ASSIGN },
     { type: '+', literal: TokenType.PLUS },
     { type: '(', literal: TokenType.LPAREN },
