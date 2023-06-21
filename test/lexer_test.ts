@@ -33,14 +33,48 @@ Deno.test('test identifiers', () => {
   
   let add = fn(x, y) {
     x + y;
-  }`
+  };
+  
+  let result = add(five, ten);`
 
-  const tests: {type: string, literal: string}[] = [
+  const tests: Token[] = [
     { type: TokenType.LET, literal: 'let' },
     { type: TokenType.IDENT, literal: 'five' },
     { type: TokenType.ASSIGN, literal: '=' },
     { type: TokenType.NUMBER, literal: '5' },
-    { type: TokenType.SEMICOLON, literal: ';' }
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.LET, literal: 'let' },
+    { type: TokenType.IDENT, literal: 'ten' },
+    { type: TokenType.ASSIGN, literal: '=' },
+    { type: TokenType.NUMBER, literal: '10' },
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.LET, literal: 'let' },
+    { type: TokenType.IDENT, literal: 'add' },
+    { type: TokenType.ASSIGN, literal: '=' },
+    { type: TokenType.FUNCTION, literal: 'fn' },
+    { type: TokenType.LPAREN, literal: '(' },
+    { type: TokenType.IDENT, literal: 'x' },
+    { type: TokenType.COMMA, literal: ',' },
+    { type: TokenType.IDENT, literal: 'y' },
+    { type: TokenType.RPAREN, literal: ')' },
+    { type: TokenType.LBRACE, literal: '{' },
+    { type: TokenType.IDENT, literal: 'x' },
+    { type: TokenType.PLUS, literal: '+' },
+    { type: TokenType.IDENT, literal: 'y' },
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.RBRACE, literal: '}' },
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.LET, literal: 'let' },
+    { type: TokenType.IDENT, literal: 'result' },
+    { type: TokenType.ASSIGN, literal: '=' },
+    { type: TokenType.IDENT, literal: 'add' },
+    { type: TokenType.LPAREN, literal: '(' },
+    { type: TokenType.IDENT, literal: 'five' },
+    { type: TokenType.COMMA, literal: ',' },
+    { type: TokenType.IDENT, literal: 'ten' },
+    { type: TokenType.RPAREN, literal: ')' },
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.EOF, literal: 'EOF' },
   ]
 
   const l = new Lexer(input)
@@ -48,7 +82,7 @@ Deno.test('test identifiers', () => {
   for (const tt of tests) {
     const tok: Token = l.nextToken()
     console.info(tok)
-    assertEquals(tok.type, tt.type)
-    assertEquals(tok.literal, tt.literal)
+    assertEquals(tok.type, tt.type, 'wrong token type')
+    assertEquals(tok.literal, tt.literal, 'wrong token literal')
   }
 })
