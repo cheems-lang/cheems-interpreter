@@ -35,7 +35,16 @@ Deno.test('test identifiers', () => {
     x + y;
   };
   
-  let result = add(five, ten);`
+  let result = add(five, ten);
+  !-/*5;
+  5 < 10 > 5;
+
+  if (5 < 10) {
+    return true;
+  } else {
+    return false;
+  }
+  `
 
   const tests: Token[] = [
     { type: TokenType.LET, literal: 'let' },
@@ -74,6 +83,35 @@ Deno.test('test identifiers', () => {
     { type: TokenType.IDENT, literal: 'ten' },
     { type: TokenType.RPAREN, literal: ')' },
     { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.BANG, literal: '!' },
+    { type: TokenType.MINUS, literal: '-' },
+    { type: TokenType.SLASH, literal: '/' },
+    { type: TokenType.ASTERISK, literal: '*' },
+    { type: TokenType.NUMBER, literal: '5' },
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.NUMBER, literal: '5' },
+    { type: TokenType.LT, literal: '<' },
+    { type: TokenType.NUMBER, literal: '10' },
+    { type: TokenType.GT, literal: '>' },
+    { type: TokenType.NUMBER, literal: '5' },
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.IF, literal: 'if' },
+    { type: TokenType.LPAREN, literal: '(' },
+    { type: TokenType.NUMBER, literal: '5' },
+    { type: TokenType.LT, literal: '<' },
+    { type: TokenType.NUMBER, literal: '10' },
+    { type: TokenType.RPAREN, literal: ')' },
+    { type: TokenType.LBRACE, literal: '{' },
+    { type: TokenType.RETURN, literal: 'return' },
+    { type: TokenType.TRUE, literal: 'true' },
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.RBRACE, literal: '}' },
+    { type: TokenType.ELSE, literal: 'else' },
+    { type: TokenType.LBRACE, literal: '{' },
+    { type: TokenType.RETURN, literal: 'return' },
+    { type: TokenType.FALSE, literal: 'false' },
+    { type: TokenType.SEMICOLON, literal: ';' },
+    { type: TokenType.RBRACE, literal: '}' },
     { type: TokenType.EOF, literal: 'EOF' },
   ]
 

@@ -47,6 +47,24 @@ export class Lexer {
       case '+':
         tok = { type: TokenType.PLUS, literal: this.ch }
         break
+      case '-':
+        tok = { type: TokenType.MINUS, literal: this.ch }
+        break
+      case '!':
+        tok = { type: TokenType.BANG, literal: this.ch }
+        break
+      case '/':
+        tok = { type: TokenType.SLASH, literal: this.ch }
+        break
+      case '*':
+        tok = { type: TokenType.ASTERISK, literal: this.ch }
+        break
+      case '<':
+        tok = { type: TokenType.LT, literal: this.ch }
+        break
+      case '>':
+        tok = { type: TokenType.GT, literal: this.ch }
+        break
       case '{':
         tok = { type: TokenType.LBRACE, literal: this.ch }
         break
@@ -97,7 +115,7 @@ export class Lexer {
   readNumber(): string {
     const position = this.position
 
-    while(this.isDigit(this.ch)) {
+    while (this.isDigit(this.ch)) {
       this.readChar()
     }
 
