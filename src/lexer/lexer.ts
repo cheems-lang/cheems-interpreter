@@ -81,7 +81,7 @@ export class Lexer {
           return tok
         } else if (this.isDigit(this.ch)) {
           tok = { type: TokenType.NUMBER, literal: this.readNumber() }
-          return tok;
+          return tok
         } else {
           tok = { type: TokenType.ILLEGAL, literal: this.ch }
         }
