@@ -1,4 +1,6 @@
-# The Cheems Interpreter
+# What is Cheems?
+
+Cheems is an interpreted meme programming language.
 
 ## Tools and hardware
 
