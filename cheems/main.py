@@ -1,9 +1,12 @@
-from tokenz.tokenz import TokenType
+from tokenz.tokenz import TokenType, Token
+from lexer.lexer import Lexer
 
 
 def main():
-    mytoken = TokenType("sdsd")
-    print(mytoken.token_name)
+    mytoken = Token(TokenType.ASSIGN, "asas")
+    mylexer = Lexer("sdsd")
+    print(mytoken.literal)
+    print(mylexer.nn)
 
 
 if __name__ == "__main__":
