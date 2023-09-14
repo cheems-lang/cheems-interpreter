@@ -4,7 +4,7 @@
 
 Cheems is an interpreted meme programming language.
 
-# How to run?
+## How to run?
 
 1. Create a new virtual environment (`venv`, suggested), source (activate) it,
    and install the dependencies
@@ -15,4 +15,10 @@ source venv/bin/activate
 pip install -r "requirements.txt"
 ```
 
-# Tests
+## Tests
+
+Make sure the virtual environment is activated.
+
+```bash
+pytest tests
+```
