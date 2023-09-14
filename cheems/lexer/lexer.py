@@ -2,7 +2,7 @@ import sys
 
 sys.path.append("./cheems")
 
-from tokenz.tokenz import TokenType, Token, look_up_indent
+from tokenz.tokenz import TokenType, Token, look_up_ident
 
 
 class Lexer:
@@ -11,9 +11,74 @@ class Lexer:
     read_position = 0
     ch: str
 
-    def __init__(self, source: str, position: int, read_position: int, ch: str):
+    def __init__(self, source: str):
         self.source = source
-        self.position = position
+        self.read_char()
 
-    def next_token():
-        pass
+    def read_char(self):
+        if self.read_position >= len(self.source):
+            self.ch = 0
+        else:
+            self.ch = self.source[self.read_position]
+            self.read_position += 1
+
+    def next_token(self):
+        tok: Token
+
+        self.skip_white_space()
+
+        match self.ch:
+            case "=":
+                tok = Token(TokenType.ASSIGN, self.ch)
+            case ";":
+                tok = Token(TokenType.SEMICOLON, self.ch)
+            case "(":
+                tok = Token(TokenType.LPAREN, self.ch)
+            case ")":
+                tok = Token(TokenType.RPAREN, self.ch)
+            case ",":
+                tok = Token(TokenType.COMMA, self.ch)
+            case "+":
+                tok = Token(TokenType.PLUS, self.ch)
+            case "-":
+                tok = Token(TokenType.MINUS, self.ch)
+            case "/":
+                tok = Token(TokenType.SLASH, self.ch)
+            case "*":
+                tok = Token(TokenType.ASTERISK, self.ch)
+            case "<":
+                tok = Token(TokenType.LT, self.ch)
+            case ">":
+                tok = Token(TokenType.GT, self.ch)
+            case "{":
+                tok = Token(TokenType.LPAREN, self.ch)
+            case "}":
+                tok = Token(TokenType.RPAREN, self.ch)
+            case 0:
+                tok = Token(TokenType.EOF, self.ch)
+            case _:
+                if self.is_letter(self.ch):
+                    lit = self.read_identifier()
+                    return Token(look_up_ident(), lit)
+                else:
+                    lit = self.read_identifier()
+                    return Token(TokenType.ILLEGAL, lit)
+
+        self.read_char()
+        return tok
+
+    def read_identifier(self) -> str:
+        identifier = ""
+
+        while self.is_letter(self.ch):
+            identifier += self.ch
+            self.read_char()
+
+        return identifier
+
+    def is_letter(self, ch: str) -> bool:
+        return "a" <= ch and ch <= "z" or "A" <= ch and ch <= "Z" or ch == "_"
+
+    def skip_white_space(self):
+        while self.ch == " " or self.ch == "\t" or self.ch == "\n" or self.ch == "\r":
+            self.read_char()

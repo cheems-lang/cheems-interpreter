@@ -6,4 +6,4 @@ from tokenz.tokenz import TokenType
 
 
 def test_lexer():
-    assert 2 == 2
+    assert 2 == 3

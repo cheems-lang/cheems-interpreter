@@ -55,7 +55,7 @@ keywords = {
 }
 
 
-def look_up_indent(ident: str) -> str:
+def look_up_ident(ident: str) -> TokenType:
     if ident in keywords:
         return keywords[ident]
 
