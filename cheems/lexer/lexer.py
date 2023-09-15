@@ -51,33 +51,45 @@ class Lexer:
             case ">":
                 tok = Token(TokenType.GT, self.ch)
             case "{":
-                tok = Token(TokenType.LPAREN, self.ch)
+                tok = Token(TokenType.LBRACE, self.ch)
             case "}":
-                tok = Token(TokenType.RPAREN, self.ch)
+                tok = Token(TokenType.RBRACE, self.ch)
             case 0:
                 tok = Token(TokenType.EOF, self.ch)
             case _:
                 if self.is_letter(self.ch):
-                    lit = self.read_identifier()
-                    return Token(look_up_ident(), lit)
+                    return Token(look_up_ident(), self.read_identifier())
+                elif self.is_digit(self.ch):
+                    return Token(TokenType.NUMBER, self.read_number())
                 else:
-                    lit = self.read_identifier()
-                    return Token(TokenType.ILLEGAL, lit)
+                    return Token(TokenType.ILLEGAL, self.read_identifier())
 
         self.read_char()
         return tok
 
     def read_identifier(self) -> str:
-        identifier = ""
+        identifier = []
 
         while self.is_letter(self.ch):
-            identifier += self.ch
+            identifier.append(self.ch)
             self.read_char()
 
-        return identifier
+        return "".join(identifier)
 
     def is_letter(self, ch: str) -> bool:
         return "a" <= ch and ch <= "z" or "A" <= ch and ch <= "Z" or ch == "_"
+
+    def is_digit(self, ch: str) -> bool:
+        return "0" <= ch and ch <= "9"
+
+    def read_number(self) -> str:
+        string_builder = []
+
+        while self.is_digit(self.ch):
+            string_builder.append(self.ch)
+            self.read_char()
+
+        return "".join(string_builder)
 
     def skip_white_space(self):
         while self.ch == " " or self.ch == "\t" or self.ch == "\n" or self.ch == "\r":
