@@ -42,6 +42,8 @@ class Lexer:
                 tok = Token(TokenType.PLUS, self.ch)
             case "-":
                 tok = Token(TokenType.MINUS, self.ch)
+            case "!":
+                tok = Token(TokenType.BANG, self.ch)
             case "/":
                 tok = Token(TokenType.SLASH, self.ch)
             case "*":
@@ -58,11 +60,12 @@ class Lexer:
                 tok = Token(TokenType.EOF, self.ch)
             case _:
                 if self.is_letter(self.ch):
-                    return Token(look_up_ident(), self.read_identifier())
+                    ident = self.read_identifier()
+                    return Token(look_up_ident(ident), ident)
                 elif self.is_digit(self.ch):
                     return Token(TokenType.NUMBER, self.read_number())
                 else:
-                    return Token(TokenType.ILLEGAL, self.read_identifier())
+                    return Token(TokenType.ILLEGAL, self.ch)
 
         self.read_char()
         return tok

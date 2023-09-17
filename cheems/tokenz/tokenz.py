@@ -52,6 +52,7 @@ keywords = {
     "false": TokenType.FALSE,
     "if": TokenType.IF,
     "else": TokenType.ELSE,
+    "return": TokenType.RETURN,
 }
 
 
